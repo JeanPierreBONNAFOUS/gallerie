@@ -22,7 +22,7 @@ while IFS= read -r line; do
 
     # Convertir l'image en vignette avec ImageMagick
     thumbnail="${filename%.jpg}-thumbnail.jpg"
-    convert "$IMAGES_DIR/$filename" -resize 640x -density 72 "$THUMBNAILS_DIR/$thumbnail"
+    convert "$IMAGES_DIR/$filename" -resize 320 -density 72 "$THUMBNAILS_DIR/$thumbnail"
 
     # Ajouter l'entrée HTML pour l'image
     cat >> $INDEX <<EOL
