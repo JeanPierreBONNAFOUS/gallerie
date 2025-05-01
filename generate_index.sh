@@ -22,7 +22,8 @@ while IFS= read -r line; do
     # Extraire le libellé et le nom du fichier
     label=$(echo $line | cut -d ':' -f 1 | sed 's/^ *- *//')
     filename=$(echo $line | cut -d ':' -f 2 | sed 's/^ *//')
-
+    # Pour voir avancement
+    echo "$filename"
     # Convertir l'image en vignette avec ImageMagick
     thumbnail="${filename%.*}-thumbnail.jpg"
     convert "$IMAGES_DIR/$filename" -resize 320 -density 72 -quality 85 "$THUMBNAILS_DIR/$thumbnail"
