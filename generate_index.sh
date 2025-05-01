@@ -29,13 +29,14 @@ while IFS= read -r line; do
     convert "$IMAGES_DIR/$filename" -resize 320 -density 72 -quality 85 "$THUMBNAILS_DIR/$thumbnail"
     # recuperer les information de l'image pour la baliste title
     title=$(identify $IMAGES_DIR/$filename)
+    info=$(file  $IMAGES_DIR/$filename)
     # Ajouter l'entrée HTML pour l'image
     cat >> $INDEX <<EOL
     <figure>
         <a href="images/$filename" download="" title="$title">
             <img src="thumbnails/$thumbnail" alt="$label">
         </a>
-        <figcaption>$label</figcaption>
+        <figcaption>$label : $info</figcaption>
     </figure>
 EOL
 done < $INDEX_TXT
