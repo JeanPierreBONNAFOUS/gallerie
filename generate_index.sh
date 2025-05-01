@@ -33,9 +33,10 @@ while IFS= read -r line; do
     # Ajouter l'entrée HTML pour l'image
     cat >> $INDEX <<EOL
     <figure>
-        <a href="images/$filename" download="" title="$title" class="tooltip">
+        <a href="images/$filename" download="" class="tooltip">
+            <span class="tooltiptext">$title
             <img src="thumbnails/$thumbnail" alt="$label">
-            <span class="tooltiptext">$title</span>
+            </span>
         </a>
         <figcaption>$label : $filename</figcaption>
     </figure>
