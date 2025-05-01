@@ -11,6 +11,9 @@ THUMBNAILS_DIR="thumbnails"
 # Créer le répertoire pour les vignettes s'il n'existe pas
 mkdir -p $THUMBNAILS_DIR
 
+# Nettoyer les anciennes vignettes
+find $THUMBNAILS_DIR -type f -name '*-thumbnail.jpg' -exec rm {} \;
+
 # Générer le fichier HTML
 cat $HEADER > $INDEX
 
@@ -23,12 +26,14 @@ while IFS= read -r line; do
     # Convertir l'image en vignette avec ImageMagick
     thumbnail="${filename%.jpg}-thumbnail.jpg"
     convert "$IMAGES_DIR/$filename" -resize 320 -density 72 "$THUMBNAILS_DIR/$thumbnail"
-
+    # recuperer les information de l'image pour la baliste title
+    title=$(identify $IMAGES_DIR/$filename")
+    
     # Ajouter l'entrée HTML pour l'image
     cat >> $INDEX <<EOL
     <figure>
-        <a href="images/$filename" download>
-            <img src="thumbnails/$thumbnail" alt="$label">
+        <a href="images/$filename" download>za
+            <img src="thumbnails/$thumbnail" alt="$label" title="$title">
         </a>
         <figcaption>$label</figcaption>
     </figure>
