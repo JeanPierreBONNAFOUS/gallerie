@@ -24,16 +24,15 @@ while IFS= read -r line; do
     filename=$(echo $line | cut -d ':' -f 2 | sed 's/^ *//')
 
     # Convertir l'image en vignette avec ImageMagick
-    thumbnail="${filename%.jpg}-thumbnail.jpg"
-    convert "$IMAGES_DIR/$filename" -resize 320 -density 72 "$THUMBNAILS_DIR/$thumbnail"
+    thumbnail="${filename%.*}-thumbnail.jpg"
+    convert "$IMAGES_DIR/$filename" -resize 320 -density 72 -quality 85 "$THUMBNAILS_DIR/$thumbnail"
     # recuperer les information de l'image pour la baliste title
-    title=$(identify $IMAGES_DIR/$filename")
-    
+    title=$(identify $IMAGES_DIR/$filename)
     # Ajouter l'entrée HTML pour l'image
     cat >> $INDEX <<EOL
     <figure>
-        <a href="images/$filename" download>za
-            <img src="thumbnails/$thumbnail" alt="$label" title="$title">
+        <a href="images/$filename" download="" title="$title">
+            <img src="thumbnails/$thumbnail" alt="$label">
         </a>
         <figcaption>$label</figcaption>
     </figure>
