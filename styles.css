@@ -15,11 +15,11 @@ body {
     justify-content: space-around;
 }
 .gallery img {
-    width: 640px;
+    width: 320px;
     height: auto;
     margin: 10px;
-    border: 2px solid #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 5px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 }
 .gallery figcaption {
     text-align: center;
